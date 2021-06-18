@@ -1,11 +1,5 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-/*
-    * Da_timestamp
-    *โมเดลสำหรับ insert Update Deleteเท่านั้น
-    * @author Weradet Nopsombun 62160110
-    * @update Date 2564-04-13
-*/
 include_once 'Da_sub.php';
 class M_sub extends Da_sub
 {

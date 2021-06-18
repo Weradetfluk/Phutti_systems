@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg bg-info fixed-top">
         <div class="container">
             <img src="<?php echo base_url('assets/img/ph_logo.png'); ?>" style="width: 60px; height: 60px;" alt="">
@@ -45,29 +44,8 @@
                             <p class="card-category">ตารางแสดงรายชื่อชุมนุมของโรงเรียนพุทธิรังสีพิบูล</p>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class=" text-info">
-                                        <th>
-                                            ลำดับ
-                                        </th>
-                                        <th>
-                                            ชื่อชุมนุม
-                                        </th>
-                                        <th>
-                                            อาจารย์ที่ปรึกษา
-                                        </th>
-                                        <th>
-                                            จำนวนรับ
-                                        </th>
-                                        <th>
-                                            ดำเนินการ
-                                        </th>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
+                            <div class="table-responsive" id="table_sub">
+             
                             </div>
                         </div>
                     </div>
@@ -93,6 +71,79 @@
             </div>
         </div>
     </footer>
+
+
+    <script>
+        $(document).ready(function() {
+            get_data_ajax();
+        });
+
+        function get_data_ajax() {
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: '<?php echo base_url('Sub/Sub/show_sub_data_ajax');   ?>',
+                success: function(res) {
+                    console.log(res);
+                    create_table(res)
+                },
+                error: function() {
+                   
+                }
+            });
+        }
+
+        function create_table(arr_sub) {
+        let html_code = '';
+
+        html_code += '<table class="table table-striped" id="sub_tale">';
+        html_code += '<thead class="text-info">';
+        html_code += '<tr>';
+        html_code += '<th   style="text-align: center;font-size: 16px;" >ลำดับ</th>';
+        html_code += '<th   style="text-align: center;font-size: 16px;" >ชื่อชุมนุม</th>';
+        html_code += '<th   style="text-align: center;font-size: 16px;" >อาจารย์ที่ปรึกษา</th>';
+        html_code += '<th   style="text-align: center;font-size: 16px;"  >จำนวนรับ</th>';
+        html_code += '<th   style="text-align: center;font-size: 16px;"  >ดำเนินการ</th>';
+        html_code += '</tr>';
+        html_code += ' </thead>';
+        html_code += ' <tbody class="list">';
+
+
+
+        arr_sub.forEach((row_tsm, index_tsm) => {
+
+            html_code += '<tr>';
+            html_code += '<td style="text-align: center; font-size: 18px;" >' + row_tsm['sub_id'] + '</td>';
+            html_code += '<td style="text-align: center; font-size: 18px;" >' + row_tsm['sub_name'] + '</td>';
+            html_code += '<td style="text-align: center; font-size: 18px;" >' + row_tsm['tea_firstname'] + ' ' + row_tsm['tea_lastname'] + '</td>';
+            html_code += '<td style="text-align: center; font-size: 18px;  background-color: red;" >' + row_tsm['sub_limit'] + '</td>';
+            html_code += '<td style="text-align: center; background-color: red;" >' + '<button class="btn btn-primary">สมัคร</button>' + '</td>';
+      
+
+            html_code += '</tr>';
+
+        });
+
+
+        html_code += '</tbody>';
+        html_code += ' </table>';
+
+        $('#table_sub').html(html_code);
+
+        $('#sub_tale').dataTable({
+            "ordering": false,
+            colReorder: {
+                realtime: true
+            },
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            searching: false
+        });
+
+    }
+    </script>
 </body>
 
 </html>

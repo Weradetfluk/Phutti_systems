@@ -9,15 +9,20 @@ class Sub extends Ph_controller {
     } 
     public function show_sub_data(){
        
-      $this->load->model('M_sub','msub');
-      $data = array();
-      $data = $this->msub->show_sub_all();
-
-      $this->output('regis_sub/regis_sub',$data);
+      $this->output('regis_sub/regis_sub');
 
     }
-    public function check_systens_status(){
+    public function check_systems_status(){
       
+    }
+
+    public  function show_sub_data_ajax(){
+            
+      $this->load->model('M_sub','msub');
+      $data =array(); 
+      $data['arr_sub'] = $this->msub->show_sub_all()->result();
+
+      echo json_encode( $data['arr_sub']);
     }
 
 }
