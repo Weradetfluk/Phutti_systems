@@ -112,12 +112,12 @@
 
         arr_sub.forEach((row_tsm, index_tsm) => {
 
-            html_code += '<tr>';
-            html_code += '<td style="text-align: center; font-size: 18px;" >' + row_tsm['sub_id'] + '</td>';
-            html_code += '<td style="text-align: center; font-size: 18px;" >' + row_tsm['sub_name'] + '</td>';
-            html_code += '<td style="text-align: center; font-size: 18px;" >' + row_tsm['tea_firstname'] + ' ' + row_tsm['tea_lastname'] + '</td>';
-            html_code += '<td style="text-align: center; font-size: 18px;  background-color: red;" >' + row_tsm['sub_limit'] + '</td>';
-            html_code += '<td style="text-align: center; background-color: red;" >' + '<button class="btn btn-primary">สมัคร</button>' + '</td>';
+            html_code += '<tr style="text-align: center;">';
+            html_code += '<td >' + row_tsm['sub_id'] + '</td>';
+            html_code += '<td >' + row_tsm['sub_name'] + '</td>';
+            html_code += '<td >' + row_tsm['tea_firstname'] + ' ' + row_tsm['tea_lastname'] + '</td>';
+            html_code += '<td >' + row_tsm['sub_limit'] + '</td>';
+            html_code += '<td >' + '<button class="btn btn-primary">สมัคร</button>' + '</td>';
       
 
             html_code += '</tr>';
@@ -131,15 +131,7 @@
         $('#table_sub').html(html_code);
 
         $('#sub_tale').dataTable({
-            "ordering": false,
-            colReorder: {
-                realtime: true
-            },
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            searching: false
+
         });
 
     }
